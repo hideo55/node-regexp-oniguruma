@@ -1,0 +1,6 @@
+{"name" : "oniguruma",
+ "description" : "Node binding of Oniguruma Regular Expressions library",
+ "version" : "0.0.1",
+ "main" : "./oniguruma.node",
+ "scripts" : { "build" : "node-waf configure build" }
+}
