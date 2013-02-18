@@ -1,6 +1,16 @@
-{"name" : "oniguruma",
- "description" : "Node binding of Oniguruma Regular Expressions library",
- "version" : "0.0.1",
- "main" : "./oniguruma.node",
- "scripts" : { "build" : "node-waf configure build" }
+{
+  "name": "regexp-oniguruma",
+  "description": "Node binding of Oniguruma Regular Expressions library",
+  "version": "0.0.1",
+  "homepage": "http://hideo55.github.com/node-regexp-oniguruma",
+  "repository": "https://github.com/hideo55/node-regexp-oniguruma",
+  "bugs": {
+    "url": "https://github.com/hideo55/node-regexp-oniguruma/issues"
+  },
+  "keywords": ["regexp"],
+  "author": "Hideaki Ohno <hide.o.j55@gmail.com>",
+  "main": "./oniguruma.node",
+  "engines": {
+    "node": ">=0.6.13"
+  }
 }

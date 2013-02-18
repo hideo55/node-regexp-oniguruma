@@ -32,13 +32,14 @@ public:
 
 private:
     regex_t* regex;
+    const OnigUChar* pattern;
     OnigOptionType option;
     OnigEncoding enc;
     OnigSyntaxType* syntax;
-    const OnigUChar* pattern;
 
-    int lastIndex;
+
     bool global;
+    int lastIndex;
 
     int Search(const char* target, unsigned int start_pos, OnigRegion* region);
     int Match(const char* target, OnigRegion* region);

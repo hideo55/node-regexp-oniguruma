@@ -6,13 +6,34 @@
 ## Usage
 
 ```javascript
-var Onig = require('oniguruma).Onig;
+var Onig = require('oniguruma').Onig;
 
 var str = 'cdbBdbsbz';
 var p = new Onig("d(b+)(d)", 'ig');
 
 var res = p.exec(str);
 ```
+
+## API
+
+### new Onig()
+
+### exec()
+
+### test()
+
+## Constants
+
+### SYNTAX_ASIS
+### SYNTAX_POSIX_BASIC
+### SYNTAX_POSIX_EXTENDED
+### SYNTAX_EMACS
+### SYNTAX_GREP
+### SYNTAX_GNU
+### SYNTAX_JAVA
+### SYNTAX_PERL
+### SYNTAX_PERL_NG
+### SYNTAX_RUBY
 
 ## License 
 

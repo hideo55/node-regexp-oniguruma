@@ -17,15 +17,15 @@ void NodeOniguruma::Init(Handle<Object> target) {
     t->InstanceTemplate()->SetInternalFieldCount(1);
 
     NODE_SET_PROTOTYPE_METHOD(t, "exec", Search);
+    //NODE_SET_PROTOTYPE_METHOD(t, "test", )
 
-    Persistent < Function > constructor = Persistent<Function>::New(t->GetFunction());
+    Persistent < Function > constructor = Persistent < Function > ::New(t->GetFunction());
     target->Set(String::NewSymbol("Onig"), constructor);
-
 }
 
 NodeOniguruma::NodeOniguruma(const char* pattern_, OnigOptionType option_, OnigSyntaxType* syntax_, bool global_) :
-    pattern((OnigUChar*) pattern_), option(option_), enc(ONIG_ENCODING_UTF8), syntax(syntax_), global(global_),
-            lastIndex(0) {
+        pattern((OnigUChar*) pattern_), option(option_), enc(ONIG_ENCODING_UTF8), syntax(syntax_), global(global_), lastIndex(
+                0) {
     OnigErrorInfo err_info;
     int ret = onig_new(&regex, pattern, pattern + strlen((char*) pattern), option, enc, syntax, &err_info);
     if (ret != ONIG_NORMAL) {
@@ -61,11 +61,25 @@ Handle<Value> NodeOniguruma::New(const Arguments& args) {
             //Option parsing
             REQ_STR_ARG(1);
             std::string options = *String::Utf8Value(args[1]->ToString());
+            // ignore case
             if (options.find('i') != std::string::npos) {
                 opts |= ONIG_OPTION_IGNORECASE;
             }
+            // global match option
             if (options.find('g') != std::string::npos) {
                 global_ = true;
+            }
+            // multiline option
+            if (options.find('m') != std::string::npos) {
+                opts |= ONIG_OPTION_MULTILINE;
+            }
+            // Extended option
+            if (options.find('x') != std::string::npos ){
+                opts |= ONIG_OPTION_EXTEND;
+            }
+            // No encoding option
+            if (options.find('n') != std::string::npos ){
+                opts |= ONIG_OPTION_EXTEND;
             }
         }
         NodeOniguruma *onig = new NodeOniguruma(pattern_str.c_str(), opts, syn, global_);
@@ -100,7 +114,7 @@ Handle<Value> NodeOniguruma::Search(const Arguments& args) {
     REQ_STR_ARG(0);
     std::string target = *String::Utf8Value(args[0]->ToString());
 
-    NodeOniguruma* onig = Unwrap<NodeOniguruma> (args.This());
+    NodeOniguruma* onig = Unwrap < NodeOniguruma > (args.This());
 
     unsigned int match_pos = 0;
     if (onig->global) {
